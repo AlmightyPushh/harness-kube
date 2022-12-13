@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox
+  name: hello-world:linux
   namespace: default
 spec: 
   containers:
-  - image: busybox
+  - image: hello-world:linux
     command:
       - sleep
       - “3600”
     imagePullPolicy:ifNotPresent
-    name: busybox
+    name: hello-world:linux
   restartPolicy: Always

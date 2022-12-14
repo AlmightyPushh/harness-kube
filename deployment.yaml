@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.name}}
+  name: nginx
 spec:
   selector:
     matchLabels:
       app: bg-demo-app
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:

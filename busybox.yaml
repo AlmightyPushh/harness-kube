@@ -2,11 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: busybox
+  labels:
+    app: busybox
 spec:
   replicas: 1 
   selector:
     matchLabels:
-      app: web
+      app: busybox
   template:
     metadata:
       labels:
@@ -15,6 +17,7 @@ spec:
       containers:
       - name: busybox-pod
         image: library/busybox:latest
+        imagePullPolicy: Always
         ports: 
         - containerPort: 80
         - containerPort: 443

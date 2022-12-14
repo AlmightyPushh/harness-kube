@@ -1,14 +1,31 @@
-apiVersion: v1
-kind: Pod
+apiVersion: app/v1beta1
+kind: Deployment
 metadata:
-  name: busybox
-  namespace: default
+  name: hello-world
 spec:
-  containers:
-  - image: busybox
-    command:
-      - sleep
-      - "3600"
-    imagePullPolicy: IfNotPresent
-    name: busybox
-  restartPolicy: Always
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world-pod
+        image: library/hello-world:latest
+        ports: 
+        - containerPort: 80
+        - containerPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+spec:
+  selector:
+    app: hello-world
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
